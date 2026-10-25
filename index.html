@@ -1,0 +1,1051 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Mustafa Al Tamim</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout concept: a navy hero with a looping WhatsApp-to-CRM demo, followed by working modules (workflow explorer, skill search, lead-scoring simulator, automation ROI, UAE fee calculators, exam cards). Each module owns one hue from a six-colour set, so colour tells the reader which area they are in. A command palette (Ctrl or Cmd + K) jumps anywhere. */
+:root{
+  --bg:#F3F6FB; --surface:#FFFFFF; --ink:#101827; --muted:#576277; --line:#DCE3EE;
+  --brand:#2F5BFF; --brand-ink:#FFFFFF;
+  --h1:#0E9AA7; --h2:#E08A00; --h3:#E5533D; --h4:#1F9D63; --h5:#2F5BFF; --h6:#7C4DDB;
+  --hero-bg:#0D1A33; --hero-ink:#EEF3FB; --hero-muted:#A8B7D1; --hero-line:rgba(255,255,255,.16); --live:#5FD3A3;
+  --shadow:0 1px 2px rgba(16,24,39,.05),0 8px 24px rgba(16,24,39,.06);
+  --f-display:'Manrope','Segoe UI',system-ui,sans-serif;
+  --f-body:'IBM Plex Sans','Segoe UI',system-ui,sans-serif;
+  --f-mono:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0A0F1A; --surface:#121A29; --ink:#E9EEF7; --muted:#9AA7BD; --line:#24304A;
+  --brand:#7C98FF; --brand-ink:#0A0F1A;
+  --h1:#34D1DE; --h2:#FFB94A; --h3:#FF7F6B; --h4:#4FD68E; --h5:#7C98FF; --h6:#A98BFF;
+  --hero-bg:#101F40; --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0A0F1A; --surface:#121A29; --ink:#E9EEF7; --muted:#9AA7BD; --line:#24304A;
+  --brand:#7C98FF; --brand-ink:#0A0F1A;
+  --h1:#34D1DE; --h2:#FFB94A; --h3:#FF7F6B; --h4:#4FD68E; --h5:#7C98FF; --h6:#A98BFF;
+  --hero-bg:#101F40; --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25); color-scheme:dark}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font:16px/1.6 var(--f-body);padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--bg)}
+.wrap{max-width:1160px;margin:0 auto}
+h1,h2,h3{font-family:var(--f-display);line-height:1.1;text-wrap:balance;margin:0}
+h2{font-size:clamp(1.55rem,3.6vw,2.2rem);font-weight:800;letter-spacing:-.025em}
+h3{font-size:1.1rem;font-weight:700}
+p{margin:0}
+a{color:var(--brand)}
+.label{font:500 .72rem/1.3 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--brand);outline-offset:2px}
+section{scroll-margin-top:76px;padding-block:clamp(44px,7vw,76px);border-top:1px solid var(--line)}
+[hidden]{display:none!important}
+
+/* header */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:40;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);display:flex;gap:12px;align-items:center;padding-block:12px;border-bottom:1px solid var(--line)}
+.brand{font:800 1.05rem var(--f-display);letter-spacing:-.01em;text-decoration:none;color:var(--ink);white-space:nowrap}
+.brand i{display:inline-block;width:9px;height:9px;border-radius:50%;background:linear-gradient(135deg,var(--h5),var(--h1));margin-right:8px}
+.nav{display:flex;gap:2px 4px;margin-left:auto;font-size:.88rem;align-items:center}
+.nav a{color:var(--muted);text-decoration:none;padding:6px 10px;border-radius:99px;transition:background .2s,color .2s}
+.nav a:hover{color:var(--ink);background:var(--surface)}
+.nav a[aria-current=true]{color:var(--brand-ink);background:var(--brand)}
+.actions{display:flex;gap:8px;align-items:center}
+.ibtn{border:1px solid var(--line);background:var(--surface);border-radius:99px;padding:6px 12px;cursor:pointer;font-size:.82rem;display:inline-flex;gap:8px;align-items:center;white-space:nowrap}
+.ibtn kbd{font:500 .7rem var(--f-mono);color:var(--muted);border:1px solid var(--line);border-radius:4px;padding:0 5px}
+.menu{display:none}
+.prog{position:absolute;left:0;right:0;bottom:-1px;height:3px;background:linear-gradient(90deg,var(--h5),var(--h1),var(--h2),var(--h3));transform-origin:0 50%;transform:scaleX(0)}
+
+/* hero */
+.band{position:relative;overflow:hidden;color:var(--hero-ink);border-radius:24px;margin-top:20px;padding:clamp(22px,5vw,60px);
+  background:radial-gradient(520px 360px at 88% -5%,rgba(47,91,255,.5),transparent 65%),radial-gradient(460px 340px at -5% 105%,rgba(14,154,167,.45),transparent 65%),radial-gradient(360px 280px at 105% 105%,rgba(229,83,61,.32),transparent 70%),var(--hero-bg)}
+.band::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(320px circle at var(--gx,70%) var(--gy,30%),rgba(255,255,255,.1),transparent 70%)}
+.band canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.hero{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(24px,4vw,44px);align-items:center}
+.hero .label{color:var(--hero-muted)}
+.hero h1{font-size:clamp(2.5rem,7.4vw,5rem);font-weight:800;letter-spacing:-.04em;margin-top:14px}
+.hero h1 .ln{display:block;overflow:hidden;padding-bottom:.1em}
+.hero h1 .w{display:inline-block;animation:rise .9s cubic-bezier(.2,.7,.2,1) backwards;animation-delay:calc(var(--i)*90ms)}
+.grad{background:linear-gradient(90deg,#7FE0EA,#FFC15E,#FF8F7C,#7FE0EA);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:rise .9s cubic-bezier(.2,.7,.2,1) backwards,gshift 9s linear infinite!important}
+@keyframes gshift{to{background-position:250% 0}}
+@keyframes rise{from{transform:translateY(105%)}to{transform:none}}
+.rolewrap{margin-top:16px;font:600 1.1rem/1.5 var(--f-display);color:var(--hero-muted);min-height:3.2em}
+.rolewrap .rot{color:#FFD28A;display:inline-block}
+.rot.swap{animation:swap .5s ease both}
+@keyframes swap{from{transform:translateY(60%);opacity:0}to{transform:none;opacity:1}}
+.hero .summary{margin-top:12px;max-width:36em;color:var(--hero-muted)}
+.badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.badge{font:500 .76rem var(--f-mono);border:1px solid var(--hero-line);background:rgba(255,255,255,.07);padding:6px 10px;border-radius:99px}
+.badge b{font-weight:600}
+.badge.a{border-color:rgba(95,211,163,.5)}.badge.b{border-color:rgba(255,193,94,.5)}.badge.c{border-color:rgba(255,143,124,.5)}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.btn{display:inline-block;background:linear-gradient(135deg,var(--h5),var(--h1));color:#fff;padding:12px 22px;border-radius:99px;font-weight:600;text-decoration:none;border:0;cursor:pointer;transition:transform .2s,box-shadow .2s;box-shadow:0 6px 20px rgba(47,91,255,.35)}
+.btn.ghost{background:transparent;color:var(--hero-ink);border:1px solid var(--hero-line);box-shadow:none}
+.btn.solid{background:var(--surface);color:var(--ink);box-shadow:none}
+
+/* chat demo */
+.demo{background:rgba(7,14,30,.58);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border:1px solid var(--hero-line);border-radius:18px;padding:16px;display:grid;gap:14px;min-width:0}
+.demo-top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;font-size:.82rem;color:var(--hero-muted)}
+.demo-top b{color:var(--hero-ink);font-weight:600}
+.live{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--live);margin-right:8px;animation:pulse 1.8s ease-in-out infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(95,211,163,.55)}100%{box-shadow:0 0 0 8px rgba(95,211,163,0)}}
+.chat{display:grid;gap:8px;align-content:end;min-height:200px}
+.msg{max-width:88%;padding:9px 12px;border-radius:14px;font-size:.9rem;line-height:1.45;animation:pop .35s ease both;overflow-wrap:anywhere}
+@keyframes pop{from{transform:translateY(8px) scale(.97);opacity:0}to{transform:none;opacity:1}}
+.msg.u{justify-self:end;background:linear-gradient(135deg,#2F5BFF,#0E9AA7);color:#fff;border-bottom-right-radius:3px}
+.msg.b{justify-self:start;background:var(--hero-ink);color:#0D1A33;border-bottom-left-radius:3px}
+.typing{justify-self:start;display:flex;gap:4px;padding:12px;background:rgba(255,255,255,.1);border-radius:12px}
+.typing i{width:6px;height:6px;border-radius:50%;background:var(--hero-muted);animation:blink 1s infinite}
+.typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
+@keyframes blink{50%{opacity:.25}}
+.crm{border-top:1px solid var(--hero-line);padding-top:12px;display:grid;gap:2px}
+.crm-h{display:flex;justify-content:space-between;font-size:.72rem;font-family:var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--hero-muted);margin-bottom:4px}
+.crm-r{display:flex;justify-content:space-between;gap:12px;padding:5px 6px;border-radius:6px;font-size:.86rem}
+.crm-r span:first-child{color:var(--hero-muted)}
+.crm-r span:last-child{font-family:var(--f-mono);text-align:right}
+.crm-r.flash{animation:flash 1s ease}
+@keyframes flash{from{background:rgba(95,211,163,.4)}to{background:transparent}}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,170px),1fr));gap:12px;padding-block:32px 8px;perspective:900px}
+.tile{--hc:var(--h5);border:1px solid var(--line);border-top:4px solid var(--hc);border-radius:14px;padding:18px;background:var(--surface);box-shadow:var(--shadow);display:grid;gap:8px;align-content:start;min-width:0;transition:transform .2s ease;will-change:transform}
+.tile .n{font:800 clamp(1.7rem,3vw,2.3rem) var(--f-display);letter-spacing:-.03em;font-variant-numeric:tabular-nums;white-space:nowrap;color:var(--hc)}
+.tile p{font-size:.84rem;color:var(--muted);line-height:1.4}
+.meter{height:5px;background:var(--line);border-radius:5px;overflow:hidden;margin-top:auto}
+.meter i{display:block;height:100%;width:var(--w);background:var(--hc);border-radius:5px}
+.in .meter i{animation:grow 1.2s cubic-bezier(.2,.7,.2,1)}
+@keyframes grow{from{width:0}}
+
+/* section heads */
+.sec-head{display:grid;gap:10px;margin-bottom:30px;max-width:48em}
+.sec-head p{color:var(--muted)}
+.sec-head .label{color:var(--sec,var(--brand));display:flex;align-items:center;gap:8px}
+.sec-head .label::before{content:"";width:22px;height:3px;border-radius:2px;background:var(--sec,var(--brand))}
+.rv{transform:translateY(22px);transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.rv.in{transform:none}
+.panel{position:relative;isolation:isolate;overflow:hidden;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:clamp(18px,3vw,26px);min-width:0;box-shadow:var(--shadow)}
+.panel::before{content:"";position:absolute;inset:0;z-index:-1;opacity:0;transition:opacity .3s;background:radial-gradient(280px circle at var(--mx,50%) var(--my,50%),color-mix(in srgb,var(--hc,var(--brand)) 16%,transparent),transparent 70%)}
+.panel:hover::before{opacity:1}
+.panel h3{margin-bottom:8px}
+.chip{display:inline-block;font:600 .78rem var(--f-mono);padding:1px 8px;border-radius:99px;background:color-mix(in srgb,var(--hc) 16%,transparent);color:var(--hc);margin-right:2px}
+
+/* experience */
+.jobs{position:relative;padding-left:30px;--p:1}
+.jobs::before{content:"";position:absolute;left:5px;top:6px;bottom:6px;width:3px;border-radius:2px;background:var(--line)}
+.jobs::after{content:"";position:absolute;left:5px;top:6px;width:3px;border-radius:2px;height:calc((100% - 12px)*var(--p));background:linear-gradient(var(--h3),var(--h2),var(--h1))}
+.job{position:relative;display:grid;grid-template-columns:minmax(0,.3fr) minmax(0,.7fr);gap:24px;padding-block:28px;border-bottom:1px solid var(--line)}
+.job:first-child{padding-top:0}.job:last-child{border-bottom:0}
+.job::before{content:"";position:absolute;left:-30px;top:34px;width:13px;height:13px;border-radius:50%;background:var(--bg);border:3px solid var(--h3)}
+.job:first-child::before{top:6px}
+.job:last-child::before{border-color:var(--h1)}
+.job .when{font:500 .85rem var(--f-mono);color:var(--muted)}
+.job h3{font-size:1.3rem}
+.job .org{color:var(--muted);margin-top:4px}
+.job ul{margin:14px 0 0;padding-left:0;list-style:none;display:grid;gap:12px}
+.job li{color:var(--muted);padding-left:16px;position:relative}
+.job li::before{content:"";position:absolute;left:0;top:.65em;width:6px;height:6px;border-radius:50%;background:var(--hc,var(--h3))}
+.job li b{color:var(--ink);font-weight:600}
+
+/* workflow */
+.flowbox{display:grid;gap:20px}
+.flow{display:flex;align-items:stretch}
+.fnode{--hc:var(--h1);flex:0 0 auto;width:calc((100% - 5*34px)/6);min-width:0;border:2px solid var(--line);background:var(--surface);border-radius:14px;padding:12px 8px;cursor:pointer;display:grid;gap:6px;justify-items:center;text-align:center;transition:transform .25s,border-color .25s,box-shadow .25s}
+.fnode .ic{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:color-mix(in srgb,var(--hc) 18%,transparent);color:var(--hc);font:700 .95rem var(--f-mono)}
+.fnode .nm{font-size:.8rem;line-height:1.25;font-weight:600}
+.fnode:hover{transform:translateY(-3px)}
+.fnode[aria-selected=true]{border-color:var(--hc);box-shadow:0 8px 24px color-mix(in srgb,var(--hc) 30%,transparent)}
+.lnk{flex:1 1 34px;position:relative;align-self:center;height:2px;background:repeating-linear-gradient(90deg,var(--line) 0 6px,transparent 6px 10px);min-width:20px}
+.lnk i{position:absolute;top:50%;left:0;width:8px;height:8px;margin-top:-4px;border-radius:50%;background:var(--brand);animation:travel 2.2s linear infinite;animation-delay:calc(var(--i)*.35s)}
+@keyframes travel{from{left:0;opacity:0}15%{opacity:1}85%{opacity:1}to{left:calc(100% - 8px);opacity:0}}
+@keyframes travelv{from{top:0;opacity:0}15%{opacity:1}85%{opacity:1}to{top:calc(100% - 8px);opacity:0}}
+.fdetail{--hc:var(--h1);border-left:5px solid var(--hc)}
+.fdetail.swap>*{animation:fadeup .45s ease both}
+@keyframes fadeup{from{transform:translateY(10px);opacity:0}to{transform:none;opacity:1}}
+.fdetail .tags{margin-top:12px}
+
+/* skills explorer */
+.search{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
+.search input{flex:1 1 220px;min-width:0;padding:11px 16px;border:1px solid var(--line);border-radius:99px;background:var(--surface)}
+.cats{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:18px}
+.cats button{--hc:var(--brand);border:1px solid var(--line);background:var(--surface);padding:6px 12px;border-radius:99px;cursor:pointer;font-size:.84rem;display:inline-flex;gap:6px;align-items:center;transition:background .2s}
+.cats button i{width:8px;height:8px;border-radius:50%;background:var(--hc)}
+.cats button[aria-pressed=true]{background:color-mix(in srgb,var(--hc) 18%,var(--surface));border-color:var(--hc)}
+.tags{display:flex;flex-wrap:wrap;gap:8px}
+.tag{--hc:var(--brand);font-size:.86rem;border:1px solid color-mix(in srgb,var(--hc) 40%,var(--line));background:color-mix(in srgb,var(--hc) 9%,var(--surface));padding:5px 12px;border-radius:99px;color:var(--ink);transition:transform .2s;animation:fadeup .4s ease both;animation-delay:calc(var(--i)*18ms)}
+.tag:hover{transform:translateY(-2px) scale(1.03)}
+.count{font:500 .8rem var(--f-mono);color:var(--muted);margin-bottom:12px}
+.ticker{overflow:hidden;margin-bottom:28px;display:grid;gap:10px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.lane{display:flex;gap:10px;width:max-content;animation:slide 48s linear infinite}
+.lane.rev{animation-direction:reverse;animation-duration:56s}
+.ticker:hover .lane{animation-play-state:paused}
+.lane span{--hc:var(--brand);font:500 .85rem var(--f-mono);border:1px solid var(--line);border-left:4px solid var(--hc);background:var(--surface);padding:7px 14px;border-radius:10px;white-space:nowrap}
+@keyframes slide{to{transform:translateX(-50%)}}
+
+/* lifecycle */
+.track{position:relative;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));margin-bottom:24px}
+.track::before,.track .fill{content:"";position:absolute;left:calc(100%/12);top:20px;height:3px;border-radius:2px;background:var(--line)}
+.track::before{right:calc(100%/12)}
+.track .fill{background:linear-gradient(90deg,var(--h1),var(--h2),var(--h3));width:calc((100% - 100%/6)*var(--k,0));transition:width .6s cubic-bezier(.2,.7,.2,1)}
+.node{--hc:var(--h1);position:relative;display:grid;justify-items:center;gap:8px;background:none;border:0;cursor:pointer;padding:0 2px;text-align:center}
+.node .dot{width:42px;height:42px;border-radius:50%;background:var(--surface);border:3px solid var(--line);display:grid;place-items:center;font:600 .88rem var(--f-mono);color:var(--muted);transition:all .35s}
+.node[aria-selected=true] .dot{background:var(--hc);border-color:var(--hc);color:#fff;transform:scale(1.15);box-shadow:0 6px 18px color-mix(in srgb,var(--hc) 45%,transparent)}
+.node.done .dot{border-color:var(--hc);color:var(--ink)}
+.node .nm{font-size:.8rem;color:var(--muted);line-height:1.25}
+.node[aria-selected=true] .nm{color:var(--ink);font-weight:600}
+.detail{--hc:var(--h1);min-height:150px;border-top:4px solid var(--hc)}
+.detail.swap>*{animation:fadeup .45s ease both}
+
+/* tools */
+.tool{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:20px}
+.toolh{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.toolh h3{font-size:1.25rem}
+.field{display:grid;gap:6px;margin-bottom:14px}
+.field label,.field legend{font:500 .72rem var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding:0}
+.field input[type=number],.field select{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--bg)}
+.field input[type=range]{width:100%;accent-color:var(--hc,var(--brand))}
+fieldset.field{border:0;margin:0 0 14px;min-width:0}
+.seg3{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+.seg3 input{position:absolute;opacity:0;pointer-events:none}
+.seg3 label{font:500 .85rem var(--f-body);letter-spacing:0;text-transform:none;color:var(--ink);border:1px solid var(--line);background:var(--bg);padding:7px 14px;border-radius:99px;cursor:pointer;transition:all .2s}
+.seg3 input:checked+label{background:var(--hc);border-color:var(--hc);color:#fff}
+.seg3 input:focus-visible+label{outline:3px solid var(--brand);outline-offset:2px}
+.sw{display:flex;align-items:center;gap:12px;cursor:pointer;margin-bottom:12px;font-size:.95rem}
+.sw input{appearance:none;-webkit-appearance:none;width:44px;height:25px;border-radius:99px;background:var(--line);position:relative;transition:background .2s;flex:none;cursor:pointer;margin:0}
+.sw input::after{content:"";position:absolute;top:3px;left:3px;width:19px;height:19px;border-radius:50%;background:#fff;transition:transform .2s;box-shadow:0 1px 3px rgba(0,0,0,.3)}
+.sw input:checked{background:var(--hc,var(--h4))}
+.sw input:checked::after{transform:translateX(19px)}
+.out{display:grid;gap:12px;align-content:start}
+.big{font:800 clamp(1.7rem,4.6vw,2.5rem) var(--f-display);letter-spacing:-.025em;font-variant-numeric:tabular-nums;color:var(--hc,var(--ink))}
+.note{font-size:.85rem;color:var(--muted);margin-top:10px}
+.rows{display:grid;margin:0;padding:0;list-style:none}
+.rows li{display:flex;justify-content:space-between;gap:16px;padding:10px 0;border-bottom:1px dashed var(--line);font-size:.92rem}
+.rows li span:first-child{color:var(--muted);min-width:0}
+.rows li span:last-child{font:500 .92rem var(--f-mono);text-align:right;white-space:nowrap}
+.rows li.total{border-bottom:0;border-top:2px solid var(--ink);margin-top:6px;padding-top:12px;font-weight:600}
+.rows li.total span:first-child{color:var(--ink)}
+.pct{font:500 .8rem var(--f-mono);color:var(--muted)}
+.seg{display:flex;height:16px;border-radius:8px;overflow:hidden;background:var(--line);gap:2px}
+.seg i{display:block;flex:0 0 auto;width:0;transition:width .6s cubic-bezier(.2,.7,.2,1)}
+.c1{background:var(--h5)}.c2{background:var(--h1)}.c3{background:var(--h2)}.c4{background:var(--h3)}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;list-style:none;margin:0;padding:0;font-size:.8rem;color:var(--muted)}
+.legend li{display:flex;align-items:center;gap:6px}
+.legend i{width:10px;height:10px;border-radius:3px;display:inline-block}
+.pill{display:inline-block;justify-self:start;font:600 .75rem var(--f-mono);padding:4px 12px;border-radius:99px;letter-spacing:.06em;text-transform:uppercase}
+.pill.ok{background:color-mix(in srgb,var(--h4) 20%,transparent);color:var(--h4)}
+.pill.no{background:color-mix(in srgb,var(--h2) 20%,transparent);color:var(--h2)}
+.sub-grid{display:grid;gap:clamp(36px,6vw,56px)}
+
+/* gauge + bars */
+.gauge{display:flex;gap:20px;align-items:center;flex-wrap:wrap}
+.ring{position:relative;width:150px;height:150px;flex:none}
+.ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.ring circle{fill:none;stroke-width:13}
+.ring .tr{stroke:var(--line)}
+.ring .pg{stroke:var(--hc);stroke-linecap:round;stroke-dasharray:351.86;transition:stroke-dashoffset .8s cubic-bezier(.2,.7,.2,1),stroke .4s}
+.ring .sc{position:absolute;inset:0;display:grid;place-items:center;font:800 2.2rem var(--f-display);font-variant-numeric:tabular-nums}
+.ring .sc small{display:block;font:500 .7rem var(--f-mono);color:var(--muted);text-align:center;margin-top:-6px}
+.bars{display:grid;gap:9px}
+.bar-r{display:grid;grid-template-columns:minmax(0,7.5em) minmax(0,1fr) 3.4em;gap:10px;align-items:center;font-size:.85rem}
+.bar-r span:first-child{color:var(--muted)}
+.bar-r .tk{height:8px;background:var(--line);border-radius:8px;overflow:hidden}
+.bar-r .tk i{display:block;height:100%;width:0;border-radius:8px;background:var(--hc);transition:width .6s cubic-bezier(.2,.7,.2,1)}
+.bar-r span:last-child{font-family:var(--f-mono);text-align:right}
+.route{border:1px solid color-mix(in srgb,var(--hc) 45%,var(--line));background:color-mix(in srgb,var(--hc) 10%,var(--surface));border-radius:12px;padding:12px 14px;font-size:.92rem}
+
+.steps{list-style:none;margin:0;padding:0;counter-reset:s}
+.steps li{display:grid;grid-template-columns:2.4rem minmax(0,1fr);gap:14px;padding:16px 0;border-bottom:1px solid var(--line);counter-increment:s}
+.steps li::before{content:counter(s,decimal-leading-zero);font:600 .95rem var(--f-mono);color:var(--h2);padding-top:2px}
+.steps b{display:block}
+.steps span{color:var(--muted);font-size:.93rem}
+.sub-title{font:800 1.25rem var(--f-display);margin:40px 0 4px}
+
+/* law */
+.tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px}
+.tabs button{--hc:var(--h6);border:1px solid var(--line);background:var(--surface);padding:8px 14px;border-radius:99px;cursor:pointer;font-size:.88rem;transition:all .2s}
+.tabs button[aria-selected=true]{background:var(--hc);color:#fff;border-color:var(--hc)}
+.law dl{margin:0;display:grid;gap:14px}
+.law dt{font-weight:600}
+.law dd{margin:2px 0 0;color:var(--muted);font-size:.95rem}
+.law dl.swap>div{animation:fadeup .45s ease both;animation-delay:calc(var(--i)*60ms)}
+
+/* flip card */
+.flip{perspective:1200px;max-width:660px;height:290px;cursor:pointer;outline-offset:4px}
+.flip-in{position:relative;width:100%;height:100%;transition:transform .7s cubic-bezier(.2,.7,.2,1);transform-style:preserve-3d}
+.flip.flipped .flip-in{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:20px;padding:clamp(18px,4vw,28px);display:flex;flex-direction:column;justify-content:space-between;gap:14px;overflow:auto;box-shadow:var(--shadow)}
+.face.front{background:var(--surface);border:1px solid var(--line);border-top:6px solid var(--h6)}
+.face.back{background:linear-gradient(135deg,var(--h6),var(--h5));color:#fff;transform:rotateY(180deg)}
+.face .label{color:inherit;opacity:.75}
+.face .q{font:800 clamp(1.15rem,3.6vw,1.45rem)/1.25 var(--f-display);text-wrap:balance}
+.face .a{font-size:1.05rem}
+.ctrl{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:16px}
+.ctrl button{border:1px solid var(--line);background:var(--surface);padding:8px 16px;border-radius:99px;cursor:pointer}
+.dots{display:flex;gap:4px;flex-wrap:wrap;margin-top:16px;max-width:660px}
+.dots i{height:5px;flex:1 1 0;min-width:10px;background:var(--line);border-radius:3px;transition:background .3s}
+.dots i.on{background:var(--h6)}
+
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:16px}
+.facts ul{list-style:none;padding:0;margin:8px 0 0;display:grid;gap:8px;color:var(--muted);font-size:.95rem}
+.facts .panel{border-top:4px solid var(--hc)}
+
+/* contact */
+.cta-card{border-radius:24px;padding:clamp(24px,5vw,52px);color:var(--hero-ink);background:radial-gradient(420px 300px at 100% 0%,rgba(47,91,255,.5),transparent 65%),radial-gradient(380px 280px at 0% 100%,rgba(229,83,61,.4),transparent 65%),var(--hero-bg);display:grid;gap:18px}
+.cta-card h2{font-size:clamp(1.8rem,5vw,3rem)}
+.cta-card p{color:var(--hero-muted);max-width:36em}
+.contact-line{display:flex;flex-wrap:wrap;gap:12px}
+.cchip{display:inline-flex;align-items:center;gap:10px;padding:10px 16px;border-radius:99px;border:1px solid var(--hero-line);background:rgba(255,255,255,.08);color:var(--hero-ink);text-decoration:none;font-size:.95rem;max-width:100%;overflow-wrap:anywhere}
+.cchip button{border:0;background:rgba(255,255,255,.16);color:inherit;border-radius:99px;padding:2px 10px;font-size:.76rem;cursor:pointer}
+footer{padding-block:28px 72px;color:var(--muted);font-size:.85rem}
+
+/* overlays */
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);background:var(--ink);color:var(--bg);padding:10px 18px;border-radius:99px;font-size:.88rem;opacity:0;pointer-events:none;transition:all .3s;z-index:90}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.totop{position:fixed;right:calc(16px + env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));width:44px;height:44px;border-radius:50%;border:0;background:var(--brand);color:var(--brand-ink);cursor:pointer;box-shadow:var(--shadow);transform:scale(0);transition:transform .25s;z-index:70;font-size:1.1rem}
+.totop.show{transform:scale(1)}
+dialog{border:0;padding:0;background:transparent;color:var(--ink);width:min(580px,calc(100% - 32px));max-height:80vh;margin:12vh auto auto}
+dialog::backdrop{background:rgba(5,10,25,.6);backdrop-filter:blur(3px)}
+.pal{background:var(--surface);border:1px solid var(--line);border-radius:18px;box-shadow:0 24px 60px rgba(0,0,0,.35);overflow:hidden}
+.pal input{width:100%;border:0;border-bottom:1px solid var(--line);background:transparent;padding:16px 18px;font-size:1.05rem;outline:none}
+.pal .list{max-height:50vh;overflow:auto;padding:8px;display:grid;gap:2px}
+.pal .it{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:10px 12px;border-radius:10px;border:0;background:none;text-align:left;cursor:pointer;text-decoration:none;color:var(--ink);font-size:.95rem}
+.pal .it small{font:500 .72rem var(--f-mono);color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
+.pal .it[aria-selected=true]{background:color-mix(in srgb,var(--brand) 16%,transparent)}
+.pal .foot{padding:8px 14px;border-top:1px solid var(--line);font-size:.75rem;color:var(--muted)}
+
+/* responsive */
+@media (max-width:1020px){
+  .menu{display:inline-flex}
+  .nav{display:none;position:absolute;left:0;right:0;top:100%;margin:0;flex-direction:column;align-items:stretch;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:8px;box-shadow:var(--shadow)}
+  .nav.open{display:flex}
+  .nav a{padding:12px 14px;border-radius:10px}
+  .actions{margin-left:auto}
+  .ibtn kbd{display:none}
+}
+@media (max-width:860px){
+  .hero,.tool,.job{grid-template-columns:minmax(0,1fr)}
+  .job{gap:8px}
+  .rolewrap{min-height:4.8em}
+  .flow{flex-direction:column;align-items:stretch}
+  .fnode{width:100%;grid-template-columns:auto 1fr;justify-items:start;text-align:left;align-items:center;gap:12px;padding:10px 14px}
+  .lnk{width:2px;height:26px;flex:0 0 26px;margin-left:30px;align-self:flex-start;background:repeating-linear-gradient(180deg,var(--line) 0 6px,transparent 6px 10px)}
+  .lnk i{left:-3px;top:0;margin-top:0;animation-name:travelv}
+}
+@media (max-width:640px){
+  .node .nm{display:none}
+  .tabs{flex-wrap:nowrap;overflow-x:auto;padding-bottom:6px;-webkit-overflow-scrolling:touch}
+  .tabs button{flex:none}
+  .ibtn span.t{display:none}
+  .bar-r{grid-template-columns:minmax(0,6em) minmax(0,1fr) 3em}
+  .ring{width:128px;height:128px}
+  .flip{height:310px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .lane,.live,.hero h1 .w,.grad,.in .meter i,.msg,.typing i,.lnk i,.tag{animation:none!important}
+  .rv{transform:none;transition:none}
+  .flip-in,.seg i,.track .fill,.ring .pg,.bar-r .tk i{transition:none}
+}
+</style>
+
+<div class="wrap">
+  <header class="bar">
+    <a class="brand" href="#top"><i></i>Mustafa Al Tamim</a>
+    <nav class="nav" aria-label="Sections" id="nav">
+      <a href="#experience">Experience</a><a href="#workflow">Workflow</a><a href="#skills">Skills</a><a href="#labs">Simulators</a><a href="#calcs">Calculators</a><a href="#law">Law</a><a href="#exam">RERA prep</a><a href="#contact">Contact</a>
+    </nav>
+    <div class="actions">
+      <button class="ibtn" id="openPal" type="button" aria-label="Open command palette">Search <kbd>Ctrl K</kbd></button>
+      <button class="ibtn" id="theme" type="button" aria-label="Toggle light and dark theme"><span class="t">Theme</span><span aria-hidden="true">◐</span></button>
+      <button class="ibtn menu" id="menu" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
+    </div>
+    <div class="prog" id="prog"></div>
+  </header>
+
+  <main id="top">
+  <div class="band" id="band">
+    <canvas id="net" aria-hidden="true"></canvas>
+    <div class="hero">
+      <div>
+        <p class="label">Dhaka, Bangladesh · Available to join immediately</p>
+        <h1 aria-label="Mustafa Al Tamim"><span class="ln"><span class="w" style="--i:0">Mustafa</span></span><span class="ln"><span class="w grad" style="--i:1">Al Tamim</span></span></h1>
+        <p class="rolewrap">AI Automation · CRM and ERP Automation · IT Support<br>Building <span class="rot" id="rot">WhatsApp AI assistants</span> for UAE property.</p>
+        <p class="summary">Six years in IT, two of them delivering AI, CRM and ERP automation for property businesses. I understand the UAE property lifecycle from lead enquiry and off-plan sales to Ejari, handover and property management.</p>
+        <div class="badges">
+          <span class="badge a">Notice period <b>Immediate</b></span>
+          <span class="badge b">Visa <b>Needs sponsorship</b></span>
+          <span class="badge c">Preparing <b>RERA broker certification</b></span>
+        </div>
+        <div class="cta"><a class="btn mag" href="#labs">Try the simulators</a><a class="btn ghost mag" href="#contact">Contact</a></div>
+      </div>
+      <div class="demo" aria-label="Illustrative WhatsApp enquiry being qualified by an AI assistant and written to the CRM">
+        <div class="demo-top"><span><span class="live"></span><b>WhatsApp AI assistant</b></span><span class="mono" id="rt">Illustrative flow</span></div>
+        <div class="chat" id="chat" aria-live="off"></div>
+        <div class="crm">
+          <div class="crm-h"><span>CRM record</span><span>auto-updated</span></div>
+          <div class="crm-r"><span>Source</span><span>WhatsApp</span></div>
+          <div class="crm-r" id="r-budget"><span>Budget</span><span>–</span></div>
+          <div class="crm-r" id="r-intent"><span>Intent</span><span>–</span></div>
+          <div class="crm-r" id="r-score"><span>Lead score</span><span id="scoreV">0</span></div>
+          <div class="crm-r" id="r-stage"><span>Stage</span><span>New enquiry</span></div>
+          <div class="crm-r" id="r-route"><span>Routed to</span><span>–</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="stats" id="stats" aria-label="Measured results at Alaul Limited">
+    <div class="tile" style="--hc:var(--h1)"><span class="n" data-to="70" data-suffix="%">70%</span><p>First-level enquiries handled by the AI assistant</p><div class="meter"><i style="--w:70%"></i></div></div>
+    <div class="tile" style="--hc:var(--h2)"><span class="n">25 → &lt;1</span><p>Minutes to first response, down from 25</p></div>
+    <div class="tile" style="--hc:var(--h4)"><span class="n" data-to="28" data-prefix="+" data-suffix="%">+28%</span><p>Lead-to-viewing conversion</p><div class="meter"><i style="--w:28%"></i></div></div>
+    <div class="tile" style="--hc:var(--h5)"><span class="n" data-to="30" data-prefix="~" data-suffix=" h">~30 h</span><p>Sales team time saved each week</p></div>
+    <div class="tile" style="--hc:var(--h6)"><span class="n" data-to="40" data-prefix="+" data-suffix="%">+40%</span><p>Reporting accuracy</p><div class="meter"><i style="--w:40%"></i></div></div>
+    <div class="tile" style="--hc:var(--h3)"><span class="n" data-to="65" data-prefix="−" data-suffix="%">−65%</span><p>Manual data entry</p><div class="meter"><i style="--w:65%"></i></div></div>
+  </div>
+
+  <section id="experience" style="--sec:var(--h3)">
+    <div class="sec-head rv"><span class="label">Professional experience</span><h2>Eight years in IT, two of them automating property sales</h2></div>
+    <div class="jobs" id="jobs">
+      <article class="job">
+        <div><p class="when">02/2024 to present</p><p class="label" style="margin-top:6px">Dhaka, Bangladesh</p></div>
+        <div>
+          <h3>AI Automation Executive</h3>
+          <p class="org">Alaul Limited</p>
+          <ul>
+            <li style="--hc:var(--h1)"><span class="chip" style="--hc:var(--h1)">70%</span> Built a <b>bilingual WhatsApp AI assistant</b> with Python, LangChain and RAG that answers unit availability, payment plan and project questions. It handles 70% of first-level enquiries and cut response time from 25 minutes to under 1 minute.</li>
+            <li style="--hc:var(--h4)"><span class="chip" style="--hc:var(--h4)">+28%</span> Automated the <b>full sales funnel in Zoho and Salesforce</b> with n8n and APIs, including viewing bookings, and lifted lead-to-viewing conversion by 28%.</li>
+            <li style="--hc:var(--h5)"><span class="chip" style="--hc:var(--h5)">30 h/wk</span> Developed <b>AI agents that qualify buyers</b> by budget, location and investment intent and update the CRM automatically, saving the sales team about 30 hours per week.</li>
+            <li style="--hc:var(--h6)"><span class="chip" style="--hc:var(--h6)">+40%</span> Integrated <b>Zoho CRM, accounting and collections</b> for payment plan tracking and instalment reminders. Reporting accuracy improved by 40% and collections follow-up became faster.</li>
+            <li style="--hc:var(--h3)"><span class="chip" style="--hc:var(--h3)">−65%</span> Created a <b>document intelligence agent</b> that extracts key fields from SPAs, tenancy contracts and title deeds into the ERP, reducing manual data entry by 65%.</li>
+            <li style="--hc:var(--h2)"><span class="chip" style="--hc:var(--h2)">Power BI</span> Built <b>dashboards</b> for lead sources, cost per lead, agent performance and chatbot analytics, used by senior management.</li>
+          </ul>
+        </div>
+      </article>
+      <article class="job">
+        <div><p class="when">01/2018 to 01/2024</p><p class="label" style="margin-top:6px">Dhaka, Bangladesh</p></div>
+        <div>
+          <h3>IT Support Engineer</h3>
+          <p class="org">Soft-cell Solution</p>
+          <ul>
+            <li style="--hc:var(--h1)"><span class="chip" style="--hc:var(--h1)">98% SLA</span> Supported servers, networks and <b>200+ users</b> with 98% SLA compliance.</li>
+            <li style="--hc:var(--h4)">Wrote scripts to automate backups, monitoring and user provisioning.</li>
+          </ul>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="workflow" style="--sec:var(--h1)">
+    <div class="sec-head rv"><span class="label">How I build it</span><h2>From a WhatsApp message to a booked viewing</h2><p>A typical architecture for a property enquiry assistant. Select a step to see what happens there. Components change from project to project.</p></div>
+    <div class="flowbox">
+      <div class="flow" id="flow" role="tablist" aria-label="Workflow steps"></div>
+      <div class="panel fdetail" id="fdetail" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <section id="skills" style="--sec:var(--h5)">
+    <div class="sec-head rv"><span class="label">Core skills</span><h2>Tools and technologies</h2><p>Search by name or filter by area.</p></div>
+    <div class="ticker" id="ticker" aria-hidden="true"></div>
+    <div class="search"><input id="q" type="search" placeholder="Search skills, for example n8n or RAG" aria-label="Search skills"></div>
+    <div class="cats" id="cats" role="group" aria-label="Skill areas"></div>
+    <p class="count" id="count" aria-live="polite"></p>
+    <div class="tags" id="skillTags"></div>
+  </section>
+
+  <section id="domain" style="--sec:var(--h2)">
+    <div class="sec-head rv"><span class="label">UAE real estate</span><h2>The property lifecycle I build for</h2><p>Each stage has its own forms, registrations and handoffs. Select a stage to see where automation fits.</p></div>
+    <div class="track" id="track" role="tablist" aria-label="Property lifecycle stages"><div class="fill"></div></div>
+    <div class="panel detail" id="detail" aria-live="polite"></div>
+  </section>
+
+  <section id="labs" style="--sec:var(--h6)">
+    <div class="sec-head rv"><span class="label">Simulators</span><h2>Two models I would build for a sales team</h2><p>Both run in your browser with example numbers. Change the inputs to see how they respond.</p></div>
+    <div class="sub-grid">
+      <div id="labLead">
+        <div class="toolh"><h3>Lead scoring</h3><span class="chip" style="--hc:var(--h3)">Illustrative model</span></div>
+        <div class="tool">
+          <div class="panel" style="--hc:var(--h3)">
+            <div class="field"><label for="lBudget">Budget</label><select id="lBudget"><option value="8">Under AED 1M</option><option value="15">AED 1M to 2.5M</option><option value="21" selected>AED 2.5M to 5M</option><option value="25">Above AED 5M</option></select></div>
+            <div class="field"><label for="lTime">Buying timeline</label><select id="lTime"><option value="20">Within a month</option><option value="14" selected>Within 3 months</option><option value="6">6 months or later</option></select></div>
+            <fieldset class="field"><legend>Intent</legend>
+              <div class="seg3">
+                <input type="radio" name="lIntent" id="i1" value="18" checked><label for="i1">Investor</label>
+                <input type="radio" name="lIntent" id="i2" value="20"><label for="i2">Living in it</label>
+                <input type="radio" name="lIntent" id="i3" value="5"><label for="i3">Just browsing</label>
+              </div></fieldset>
+            <div class="field"><label for="lFin">Financing</label><select id="lFin"><option value="10">Cash</option><option value="9" selected>Mortgage pre-approved</option><option value="2">Not sorted yet</option></select></div>
+            <label class="sw"><input type="checkbox" id="lFast" checked>Replied within 5 minutes</label>
+            <label class="sw"><input type="checkbox" id="lView">Asked for a viewing</label>
+            <p class="note">Weights are an example to show the idea. A production model is tuned on a company's own conversion history.</p>
+          </div>
+          <div class="panel out" id="leadOut">
+            <div class="gauge">
+              <div class="ring"><svg viewBox="0 0 140 140" aria-hidden="true"><circle class="tr" cx="70" cy="70" r="56"/><circle class="pg" id="pg" cx="70" cy="70" r="56" stroke-dashoffset="351.86"/></svg><div class="sc"><div><span id="lScore">0</span><small>of 100</small></div></div></div>
+              <div style="display:grid;gap:8px;min-width:0"><span class="pill" id="lGrade" style="background:color-mix(in srgb,var(--hc) 20%,transparent);color:var(--hc)">Warm</span><div class="route" id="lRoute"></div></div>
+            </div>
+            <div class="bars" id="lBars"></div>
+          </div>
+        </div>
+      </div>
+
+      <div id="labRoi">
+        <div class="toolh"><h3>Automation return</h3><span class="chip" style="--hc:var(--h4)">Example inputs</span></div>
+        <div class="tool">
+          <div class="panel" style="--hc:var(--h4)">
+            <div class="field"><label for="rEnq">Enquiries per month</label><input id="rEnq" type="number" min="0" step="50" value="1200"></div>
+            <div class="field"><label for="rMin">Agent minutes per enquiry</label><input id="rMin" type="number" min="1" step="1" value="12"></div>
+            <div class="field"><label for="rRate">Agent cost per hour (AED)</label><input id="rRate" type="number" min="0" step="5" value="60"></div>
+            <div class="field"><label for="rCont">Handled fully by AI: <span id="rContOut" class="mono">70%</span></label><input id="rCont" type="range" min="0" max="95" step="5" value="70"></div>
+            <div class="field"><label for="rCost">Automation running cost per month (AED)</label><input id="rCost" type="number" min="0" step="250" value="3000"></div>
+            <p class="note">70% is the share of first-level enquiries the assistant handled at Alaul Limited. Replace the other numbers with your own.</p>
+          </div>
+          <div class="panel out" style="--hc:var(--h4)">
+            <span class="label">Net saving per month</span>
+            <div class="big" id="rNet">AED 0</div>
+            <div class="bars" id="rBars"></div>
+            <ul class="rows" id="rRows"></ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="calcs" style="--sec:var(--h4)">
+    <div class="sec-head rv"><span class="label">UAE property calculators</span><h2>Costs, yield and visa eligibility</h2><p>Government and agency costs on top of the purchase price, rental return after fees, and the Golden Visa threshold.</p></div>
+    <div class="sub-grid">
+      <div>
+        <div class="toolh"><h3>Buyer cost calculator</h3></div>
+        <div class="tool">
+          <div class="panel" style="--hc:var(--h5)">
+            <div class="field"><label for="price">Purchase price (AED)</label><input id="price" type="number" min="100000" step="50000" value="2500000"></div>
+            <div class="field"><label for="ltv">Mortgage share: <span id="ltvOut" class="mono">0%</span></label><input id="ltv" type="range" min="0" max="80" step="5" value="0"></div>
+            <div class="field"><label for="comm">Agency commission (%)</label><input id="comm" type="number" min="0" max="5" step="0.5" value="2"></div>
+            <p class="note">Rates used: DLD transfer fee 4%, trustee office fee AED 4,000 (AED 2,000 under AED 500,000) plus 5% VAT, title deed and admin about AED 580 for an apartment, mortgage registration 0.25% of the loan plus AED 290. Commission carries 5% VAT. Bank arrangement and valuation fees are separate.</p>
+          </div>
+          <div class="panel out">
+            <span class="label">Total cost of acquisition</span>
+            <div class="big" id="costTotal">AED 0</div>
+            <div class="seg" id="seg" role="img" aria-label="Share of each cost in the additional fees"><i class="c1"></i><i class="c2"></i><i class="c3"></i><i class="c4"></i></div>
+            <ul class="legend" id="legend"></ul>
+            <ul class="rows" id="costRows"></ul>
+            <p class="pct" id="costPct"></p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="toolh"><h3>Rental yield</h3></div>
+        <div class="tool">
+          <div class="panel" style="--hc:var(--h1)">
+            <div class="field"><label for="yPrice">Purchase price (AED)</label><input id="yPrice" type="number" min="100000" step="50000" value="1800000"></div>
+            <div class="field"><label for="yRent">Annual rent (AED)</label><input id="yRent" type="number" min="0" step="5000" value="125000"></div>
+            <div class="field"><label for="ySize">Unit size (sq ft)</label><input id="ySize" type="number" min="100" step="10" value="950"></div>
+            <div class="field"><label for="ySc">Service charge (AED per sq ft per year)</label><input id="ySc" type="number" min="0" step="0.5" value="16"></div>
+            <div class="field"><label for="yMgmt">Management and maintenance (% of rent)</label><input id="yMgmt" type="number" min="0" max="20" step="0.5" value="5"></div>
+          </div>
+          <div class="panel out" style="--hc:var(--h1)">
+            <span class="label">Net yield on total acquisition cost</span>
+            <div class="big" id="yNet">0.00%</div>
+            <ul class="rows" id="yRows"></ul>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="toolh"><h3>Golden Visa property check</h3></div>
+        <div class="tool">
+          <div class="panel" style="--hc:var(--h2)">
+            <div class="field"><label for="vVal">Total DLD-certified value (AED)</label><input id="vVal" type="number" min="0" step="50000" value="2200000"></div>
+            <div class="field"><label for="vType">Property status</label><select id="vType"><option value="ready">Ready, title deed issued</option><option value="off">Off-plan, approved developer</option></select></div>
+            <div class="field"><label for="vMort">Financing</label><select id="vMort"><option value="cash">Cash purchase</option><option value="mort">Mortgaged</option></select></div>
+            <p class="note">Since February 2026 the application looks at the property's DLD-certified value, not how much has been paid.</p>
+          </div>
+          <div class="panel out" id="visaOut"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="law" class="law" style="--sec:var(--h6)">
+    <div class="sec-head rv"><span class="label">Knowledge hub</span><h2>Law, regulators and compliance</h2><p>Summaries for orientation. Check the current text on dubailand.gov.ae before relying on a figure in a contract.</p></div>
+    <div class="tabs" role="tablist" id="lawTabs"></div>
+    <div class="panel" id="lawPanel" role="tabpanel" style="--hc:var(--h6)"></div>
+    <h3 class="sub-title">Dubai resale transaction</h3>
+    <ol class="steps">
+      <li><div><b>Form A listing agreement</b><span>The seller signs a RERA Form A with the brokerage. The ad needs a Trakheesi permit number before it goes live.</span></div></li>
+      <li><div><b>Form B and offer</b><span>A buyer's brokerage agreement (Form B) covers the buyer side. Price, deposit and conditions are agreed in writing.</span></div></li>
+      <li><div><b>Form F memorandum of understanding</b><span>Buyer and seller sign the Form F MOU. A deposit of usually 10% is held, often as a cheque with the brokerage.</span></div></li>
+      <li><div><b>Developer NOC</b><span>The seller requests a no-objection certificate from the developer, which confirms service charges are clear. Mortgaged units also need the bank's release process.</span></div></li>
+      <li><div><b>Trustee office transfer</b><span>Both parties attend a DLD registration trustee centre with manager's cheques. The 4% fee and trustee fees are paid and the new title deed is issued.</span></div></li>
+      <li><div><b>Handover and utilities</b><span>Keys, DEWA connection, Ejari if let, and the buyer's Golden Visa application if the value qualifies.</span></div></li>
+    </ol>
+  </section>
+
+  <section id="exam" style="--sec:var(--h6)">
+    <div class="sec-head rv"><span class="label">RERA broker certification</span><h2>Revision cards</h2><p>I am preparing for the RERA broker exam. Tap the card to flip it, or shuffle the deck.</p></div>
+    <div class="flip" id="flip" role="button" tabindex="0" aria-label="Revision card, press to flip">
+      <div class="flip-in">
+        <div class="face front"><span class="label">Question</span><div class="q" id="fq"></div><span class="label">Tap to reveal</span></div>
+        <div class="face back"><span class="label">Answer</span><div class="a" id="fa"></div><span class="label">Tap to flip back</span></div>
+      </div>
+    </div>
+    <div class="dots" id="dots"></div>
+    <div class="ctrl">
+      <button id="prev" type="button">Previous</button><button id="next" type="button">Next</button><button id="shuf" type="button">Shuffle</button>
+      <span class="mono label" id="cnt"></span>
+    </div>
+  </section>
+
+  <section id="background" style="--sec:var(--h1)">
+    <div class="sec-head rv"><span class="label">Education and credentials</span><h2>Background</h2></div>
+    <div class="facts">
+      <div class="panel rv" style="--hc:var(--h1)"><h3>Education</h3><ul><li><b style="color:var(--ink)">Higher Secondary Certificate (HSC)</b><br>Business Studies, 2007 to 2018</li></ul></div>
+      <div class="panel rv" style="--hc:var(--h2)"><h3>Certifications</h3><ul>
+        <li>IBM IT Support Certification, Coursera, 2024</li>
+        <li>Machine Learning Operations (MLOps), Duke University, Coursera, 2024</li>
+        <li>Google Advanced Data Analytics, Coursera, 2024</li>
+        <li>DevOps on AWS, Coursera, 2024</li>
+        <li>Certified Data Science Practitioner, Cert-Nexus, Coursera, 2024</li></ul></div>
+      <div class="panel rv" style="--hc:var(--h3)"><h3>Languages</h3><ul><li>English, fluent</li><li>Hindi and Urdu, conversational</li></ul></div>
+      <div class="panel rv" style="--hc:var(--h4)"><h3>Work status</h3><ul><li>Location: Dhaka, Bangladesh</li><li>Visa status: needs sponsorship</li><li>Driving licence: none</li><li>Notice period: immediate joiner</li></ul></div>
+    </div>
+  </section>
+
+  <section id="contact" style="border-top:0">
+    <div class="cta-card rv">
+      <span class="label" style="color:var(--hero-muted)">Contact</span>
+      <h2>Let's automate your property pipeline.</h2>
+      <p>Open to roles in the UAE in AI automation, CRM and ERP, and real estate technology. I can join immediately and need visa sponsorship.</p>
+      <div class="contact-line">
+        <span class="cchip mono">+880 1980 862064<button data-copy="+8801980862064" type="button">Copy</button></span>
+        <a class="cchip" href="https://wa.me/8801980862064">WhatsApp</a>
+        <span class="cchip mono">mustafalatamim@protonmail.com<button data-copy="mustafalatamim@protonmail.com" type="button">Copy</button></span>
+        <a class="cchip" href="https://github.com/tamimaiii/">github.com/tamimaiii</a>
+      </div>
+    </div>
+  </section>
+  </main>
+
+  <footer>
+    <p>The property figures and legal summaries on this page are general guidance for orientation and are not legal, tax or financial advice. Fees and rules are set by the Dubai Land Department, RERA and the relevant bank, and can change. Confirm current figures at dubailand.gov.ae. The chat, lead-scoring and return examples are illustrations and do not use any employer's data.</p>
+  </footer>
+</div>
+
+<dialog id="pal"><div class="pal"><input id="palQ" type="text" placeholder="Jump to a section, tool or action" aria-label="Command palette search" autocomplete="off"><div class="list" id="palList" role="listbox"></div><div class="foot">Arrow keys to move, Enter to open, Esc to close</div></div></dialog>
+<button class="totop" id="totop" type="button" aria-label="Back to top">↑</button>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+(function(){
+var $=function(id){return document.getElementById(id)};
+var RM=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+var fmt=function(n){return 'AED '+Math.round(n).toLocaleString('en-US')};
+var HUE=function(n){return 'var(--h'+n+')'};
+function tween(el,to,f){
+  var from=el._v||0;el._v=to;el._tk=(el._tk||0)+1;var tk=el._tk;
+  if(RM){el.textContent=f(to);return}
+  var t0=performance.now(),d=500;
+  (function step(t){if(tk!==el._tk)return;var k=Math.min(1,(t-t0)/d),e=1-Math.pow(1-k,3);el.textContent=f(from+(to-from)*e);if(k<1)requestAnimationFrame(step)})(t0);
+}
+function sleep(ms){return new Promise(function(r){setTimeout(r,ms)})}
+var toastT;
+function toast(msg){var t=$('toast');t.textContent=msg;t.classList.add('show');clearTimeout(toastT);toastT=setTimeout(function(){t.classList.remove('show')},1800)}
+function copyText(v,label){
+  try{navigator.clipboard.writeText(v).then(function(){toast(label+' copied')},function(){toast('Select the text to copy it')})}catch(x){toast('Select the text to copy it')}
+}
+document.querySelectorAll('[data-copy]').forEach(function(b){b.addEventListener('click',function(){copyText(b.getAttribute('data-copy'),'Copied')})});
+
+/* theme + menu */
+function toggleTheme(){
+  var root=document.documentElement,cur=root.getAttribute('data-theme');
+  var dark=cur?cur==='dark':window.matchMedia('(prefers-color-scheme: dark)').matches;
+  root.setAttribute('data-theme',dark?'light':'dark');toast((dark?'Light':'Dark')+' theme');
+}
+$('theme').onclick=toggleTheme;
+$('menu').onclick=function(){var o=$('nav').classList.toggle('open');this.setAttribute('aria-expanded',o)};
+$('nav').addEventListener('click',function(e){if(e.target.closest('a'))$('nav').classList.remove('open');$('menu').setAttribute('aria-expanded','false')});
+
+/* rotating role */
+var roles=['WhatsApp AI assistants','RAG knowledge systems','CRM and ERP automations','document intelligence agents','sales funnel workflows'],ri=0,rot=$('rot');
+if(!RM)setInterval(function(){ri=(ri+1)%roles.length;rot.textContent=roles[ri];rot.classList.remove('swap');void rot.offsetWidth;rot.classList.add('swap')},2600);
+
+/* hero glow follows pointer + magnetic buttons */
+var band=$('band');
+band.addEventListener('pointermove',function(e){var r=band.getBoundingClientRect();band.style.setProperty('--gx',(e.clientX-r.left)+'px');band.style.setProperty('--gy',(e.clientY-r.top)+'px')});
+if(!RM)document.querySelectorAll('.mag').forEach(function(b){
+  b.addEventListener('pointermove',function(e){if(e.pointerType!=='mouse')return;var r=b.getBoundingClientRect();b.style.transform='translate('+((e.clientX-r.left-r.width/2)*.18)+'px,'+((e.clientY-r.top-r.height/2)*.28)+'px)'});
+  b.addEventListener('pointerleave',function(){b.style.transform=''});
+});
+
+/* chat demo */
+var chat=$('chat');
+function setRow(id,val,flash){var r=$(id);r.lastElementChild.textContent=val;if(flash&&!RM){r.classList.remove('flash');void r.offsetWidth;r.classList.add('flash')}}
+function resetCrm(){setRow('r-budget','–');setRow('r-intent','–');setRow('r-stage','New enquiry');setRow('r-route','–');$('scoreV').textContent='0';$('scoreV')._v=0;$('rt').textContent='Illustrative flow'}
+function addMsg(cls,text){var d=document.createElement('div');d.className='msg '+cls;d.textContent=text;chat.appendChild(d);while(chat.children.length>5)chat.removeChild(chat.firstChild);return d}
+var script=[
+ {u:'Hi, any 2-bed units under AED 2.5M?',crm:function(){setRow('r-budget','up to AED 2.5M',1);setRow('r-stage','Qualifying',1);tween($('scoreV'),40,String)}},
+ {b:'Yes, three units match. Payment plans start at 60/40. Is this for living in or investment?',rt:'Replied in 0.8 s'},
+ {u:'Investment. Can I view this Thursday?',crm:function(){setRow('r-intent','Investment',1);tween($('scoreV'),82,String)}},
+ {b:'Booked for Thursday 4 pm. I have sent the location and let your broker know.',crm:function(){setRow('r-stage','Viewing booked',1);setRow('r-route','Broker assigned',1)}}
+];
+var run=0;
+async function playChat(){
+  var my=++run;
+  while(my===run){
+    chat.innerHTML='';resetCrm();await sleep(900);
+    for(var i=0;i<script.length;i++){
+      var s=script[i];if(my!==run)return;
+      if(s.u){addMsg('u',s.u);await sleep(700);if(s.crm)s.crm()}
+      else{var ty=document.createElement('div');ty.className='typing';ty.innerHTML='<i></i><i></i><i></i>';chat.appendChild(ty);
+        await sleep(800);chat.removeChild(ty);addMsg('b',s.b);if(s.rt)$('rt').textContent=s.rt;if(s.crm)s.crm()}
+      await sleep(1300);
+    }
+    await sleep(4200);
+  }
+}
+if(RM){script.forEach(function(s){if(s.u)addMsg('u',s.u);else addMsg('b',s.b);if(s.rt)$('rt').textContent=s.rt});
+  setRow('r-budget','up to AED 2.5M');setRow('r-intent','Investment');$('scoreV').textContent='82';setRow('r-stage','Viewing booked');setRow('r-route','Broker assigned')}
+else playChat();
+
+/* hero canvas */
+(function(){
+  var cv=$('net'),ctx=cv.getContext('2d'),pts=[],W=0,H=0,on=true,dpr=Math.min(2,window.devicePixelRatio||1);
+  var cols=['127,224,234','255,193,94','255,143,124','160,180,255'];
+  function size(){W=band.clientWidth;H=band.clientHeight;cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);
+    var n=Math.round(Math.min(48,W*H/15000));pts=[];for(var i=0;i<n;i++)pts.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.28,vy:(Math.random()-.5)*.28,c:cols[i%4]})}
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    for(var i=0;i<pts.length;i++){var p=pts[i];if(!RM){p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1}
+      for(var j=i+1;j<pts.length;j++){var q=pts[j],dx=p.x-q.x,dy=p.y-q.y,d=Math.sqrt(dx*dx+dy*dy);
+        if(d<125){ctx.strokeStyle='rgba('+p.c+','+(0.2*(1-d/125)).toFixed(3)+')';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,q.y);ctx.stroke()}}
+      ctx.fillStyle='rgba('+p.c+',.7)';ctx.beginPath();ctx.arc(p.x,p.y,1.9,0,6.283);ctx.fill()}
+    if(!RM&&on)requestAnimationFrame(draw);
+  }
+  size();draw();
+  if(window.ResizeObserver)new ResizeObserver(function(){size();if(RM)draw()}).observe(band);
+  if(window.IntersectionObserver&&!RM)new IntersectionObserver(function(e){var v=e[0].isIntersecting;if(v&&!on){on=true;draw()}on=v}).observe(band);
+})();
+
+/* reveal + count-up */
+var io=window.IntersectionObserver&&new IntersectionObserver(function(es){es.forEach(function(e){
+  if(!e.isIntersecting)return;var t=e.target;io.unobserve(t);t.classList.add('in');
+  if(t.id==='stats'&&!RM){t.querySelectorAll('.n[data-to]').forEach(function(n){
+    var to=+n.getAttribute('data-to'),pre=n.getAttribute('data-prefix')||'',suf=n.getAttribute('data-suffix')||'';
+    n._v=0;tween(n,to,function(v){return pre+Math.round(v)+suf})})}
+})},{threshold:.2});
+if(io){document.querySelectorAll('.rv').forEach(function(el){io.observe(el)});io.observe($('stats'))}
+else{document.querySelectorAll('.rv').forEach(function(el){el.classList.add('in')})}
+
+/* spotlight + tile tilt */
+document.addEventListener('pointermove',function(e){
+  var t=e.target;if(!t.closest)return;
+  var p=t.closest('.panel');if(p){var r=p.getBoundingClientRect();p.style.setProperty('--mx',(e.clientX-r.left)+'px');p.style.setProperty('--my',(e.clientY-r.top)+'px')}
+  if(RM||e.pointerType!=='mouse')return;
+  var tile=t.closest('.tile');if(tile){var b=tile.getBoundingClientRect(),x=(e.clientX-b.left)/b.width-.5,y=(e.clientY-b.top)/b.height-.5;tile.style.transform='rotateX('+(-y*8)+'deg) rotateY('+(x*10)+'deg) translateY(-3px)'}
+});
+document.querySelectorAll('.tile').forEach(function(t){t.addEventListener('pointerleave',function(){t.style.transform=''})});
+
+/* nav state, progress, timeline, back to top */
+var links=[].slice.call(document.querySelectorAll('#nav a'));
+var secs=links.map(function(a){return document.querySelector(a.getAttribute('href'))}).filter(Boolean);
+var navIO=window.IntersectionObserver&&new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){links.forEach(function(a){a.removeAttribute('aria-current')});var a=document.querySelector('#nav a[href="#'+e.target.id+'"]');if(a)a.setAttribute('aria-current','true')}})},{rootMargin:'-40% 0px -55% 0px'});
+if(navIO)secs.forEach(function(s){navIO.observe(s)});
+var jobs=$('jobs'),prog=$('prog'),totop=$('totop'),ticking=false;
+function onScroll(){
+  var h=document.documentElement.scrollHeight-window.innerHeight,y=window.scrollY;
+  prog.style.transform='scaleX('+(h>0?Math.min(1,y/h):0)+')';
+  totop.classList.toggle('show',y>700);
+  if(!RM){var r=jobs.getBoundingClientRect();jobs.style.setProperty('--p',Math.max(0.05,Math.min(1,(window.innerHeight*.65-r.top)/r.height)).toFixed(3))}
+  ticking=false;
+}
+window.addEventListener('scroll',function(){if(!ticking){ticking=true;requestAnimationFrame(onScroll)}},{passive:true});
+totop.onclick=function(){window.scrollTo({top:0,behavior:RM?'auto':'smooth'})};
+onScroll();
+
+/* workflow explorer */
+var flowSteps=[
+ ['WhatsApp message',1,'1','A buyer writes to the business number. The WhatsApp Business API, through a provider such as Twilio or 360dialog, passes the message to a webhook.',['WhatsApp Business API','Twilio','360dialog']],
+ ['n8n workflow',2,'2','n8n receives the webhook, checks whether the contact already exists, and routes the message to the right branch.',['n8n','Webhooks','Make']],
+ ['RAG lookup',5,'3','The question is embedded and matched against unit availability, payment plans and project documents held in a vector store.',['Embeddings','Pinecone','ChromaDB','LangChain']],
+ ['LLM agent',6,'4','An LLM agent writes the reply from the retrieved facts and extracts budget, location and investment intent through function calling.',['OpenAI API','Claude API','Gemini','Function calling']],
+ ['CRM update',3,'5','The lead is created or updated in Zoho CRM or Salesforce with a score and the next pipeline stage.',['Zoho CRM','Salesforce','Lead scoring']],
+ ['Broker alert',4,'6','A booked viewing or a hot lead notifies the broker, and reminders for viewings and instalments are scheduled.',['Notifications','Reminders','Power BI']]
+];
+var flow=$('flow'),fsel=0;
+flowSteps.forEach(function(s,i){
+  var b=document.createElement('button');b.type='button';b.className='fnode';b.setAttribute('role','tab');b.setAttribute('data-i',i);b.style.setProperty('--hc',HUE(s[1]));
+  b.innerHTML='<span class="ic">'+s[2]+'</span><span class="nm">'+s[0]+'</span>';flow.appendChild(b);
+  if(i<flowSteps.length-1){var l=document.createElement('div');l.className='lnk';l.setAttribute('aria-hidden','true');l.style.setProperty('--i',i);l.innerHTML='<i></i>';flow.appendChild(l)}
+});
+function showFlow(i,anim){
+  fsel=i;[].forEach.call(flow.querySelectorAll('.fnode'),function(n,k){n.setAttribute('aria-selected',k===i)});
+  var s=flowSteps[i],d=$('fdetail');d.style.setProperty('--hc',HUE(s[1]));
+  d.innerHTML='<h3>Step '+s[2]+': '+s[0]+'</h3><p style="color:var(--muted);margin-top:6px">'+s[3]+'</p><div class="tags">'+s[4].map(function(t){return '<span class="tag" style="--hc:'+HUE(s[1])+'">'+t+'</span>'}).join('')+'</div>';
+  if(anim&&!RM){d.classList.remove('swap');void d.offsetWidth;d.classList.add('swap')}
+}
+flow.addEventListener('click',function(e){var b=e.target.closest('.fnode');if(b)showFlow(+b.getAttribute('data-i'),true)});
+showFlow(0,false);
+
+/* skill explorer */
+var SK=[
+ ['AI engineering',5,['Large language models','Prompt engineering','RAG','AI agents','Multi-agent workflows','Function calling','Embeddings','Pinecone','ChromaDB']],
+ ['AI frameworks',6,['OpenAI API','Anthropic Claude API','Google Gemini','LangChain','LangGraph','Flowise','Hugging Face','Ollama (self-hosted LLMs)']],
+ ['Chatbots',1,['WhatsApp Business API','Telegram','Web chat widgets','Bilingual bots','Twilio','360dialog']],
+ ['Automation',4,['n8n','Make']],
+ ['CRM and ERP',3,['Salesforce','Zoho CRM','Lead scoring','Sales pipeline automation']],
+ ['Programming and data',2,['Python','FastAPI','SQL','PostgreSQL']],
+ ['Cloud and DevOps',6,['AWS','Docker','Git','GitHub Actions','CI/CD','Linux']],
+ ['UAE real estate',2,['Off-plan sales','Secondary sales','Property Finder lead integration','Bayut lead integration','Dubizzle lead integration','RERA and DLD process awareness','Dubai REST app','Ejari and tenancy workflows','Broker and developer CRM','Property management workflows']]
+];
+var catSel=-1;
+var cats=$('cats');
+cats.innerHTML='<button type="button" data-c="-1" aria-pressed="true"><i style="--hc:var(--brand)"></i>All</button>'+SK.map(function(c,i){return '<button type="button" data-c="'+i+'" aria-pressed="false" style="--hc:'+HUE(c[1])+'"><i></i>'+c[0]+'</button>'}).join('');
+function renderSkills(){
+  var q=$('q').value.trim().toLowerCase(),out='',n=0;
+  SK.forEach(function(c,ci){if(catSel!==-1&&catSel!==ci)return;
+    c[2].forEach(function(t){if(q&&t.toLowerCase().indexOf(q)<0&&c[0].toLowerCase().indexOf(q)<0)return;out+='<span class="tag" style="--hc:'+HUE(c[1])+';--i:'+n+'">'+t+'</span>';n++})});
+  $('skillTags').innerHTML=out||'<p style="color:var(--muted)">No skill matches that search.</p>';
+  $('count').textContent=n+' skill'+(n===1?'':'s')+(catSel===-1?'':' in '+SK[catSel][0]);
+}
+cats.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;catSel=+b.getAttribute('data-c');[].forEach.call(cats.children,function(x){x.setAttribute('aria-pressed',x===b)});renderSkills()});
+$('q').addEventListener('input',renderSkills);
+renderSkills();
+var tools=[['Python',2],['FastAPI',2],['LangChain',6],['LangGraph',6],['RAG',5],['n8n',4],['Make',4],['Zoho CRM',3],['Salesforce',3],['WhatsApp Business API',1],['Twilio',1],['360dialog',1],['Pinecone',5],['ChromaDB',5],['OpenAI API',6],['Claude API',6],['Gemini',6],['Ollama',6],['PostgreSQL',2],['Docker',6],['AWS',6],['GitHub Actions',6],['Power BI',3],['Ejari',2],['Dubai REST',2],['RERA',2],['DLD',2]];
+function lane(arr,cls){var h=arr.concat(arr).map(function(t){return '<span style="--hc:'+HUE(t[1])+'">'+t[0]+'</span>'}).join('');return '<div class="lane '+cls+'">'+h+'</div>'}
+var half=Math.ceil(tools.length/2);
+$('ticker').innerHTML=lane(tools.slice(0,half),'')+lane(tools.slice(half),'rev');
+
+/* lifecycle */
+var stages=[
+ ['Lead enquiry',1,'Leads arrive from Property Finder, Bayut, Dubizzle, web chat and WhatsApp. An AI agent qualifies budget, location and investment intent, scores the lead and updates the CRM.',['Portal lead integration','WhatsApp Business API','Lead scoring','AI agents']],
+ ['Off-plan sales',2,'Payment plans, the SPA and Oqood registration, with instalment schedules tracked against the developer\'s milestones.',['Zoho CRM','Payment plan tracking','Instalment reminders','SPA data extraction']],
+ ['Secondary sales',3,'Form A, B and F, developer NOC and trustee office transfer. Documents are captured once and reused across the file.',['Forms A, B and F','Developer NOC','Document intelligence','DLD trustee centre']],
+ ['Ejari and tenancy',4,'Tenancy contracts are captured, Ejari is registered through Dubai REST and renewals are flagged ahead of expiry.',['Ejari','Dubai REST app','Contract extraction','Renewal alerts']],
+ ['Handover',5,'Snagging, utilities and buyer documents are collected in one checklist with updates sent over WhatsApp.',['Checklists','WhatsApp updates','ERP sync']],
+ ['Property management',6,'Service requests, owner reporting and maintenance workflows feed one dashboard.',['Facilities workflows','Power BI','Owner reporting']]
+];
+var sel=0,auto=!RM,track=$('track');
+stages.forEach(function(s,i){var b=document.createElement('button');b.type='button';b.className='node';b.setAttribute('role','tab');b.setAttribute('data-i',i);b.style.setProperty('--hc',HUE(s[1]));
+  b.innerHTML='<span class="dot">'+(i+1)+'</span><span class="nm">'+s[0]+'</span>';track.appendChild(b)});
+function showStage(i,swap){
+  sel=i;track.querySelectorAll('.node').forEach(function(n,k){n.setAttribute('aria-selected',k===i);n.classList.toggle('done',k<i)});
+  track.style.setProperty('--k',i/(stages.length-1));
+  var s=stages[i],d=$('detail');d.style.setProperty('--hc',HUE(s[1]));
+  d.innerHTML='<h3>'+(i+1)+'. '+s[0]+'</h3><p style="color:var(--muted);margin-top:6px">'+s[2]+'</p><div class="tags" style="margin-top:12px">'+s[3].map(function(t){return '<span class="tag" style="--hc:'+HUE(s[1])+'">'+t+'</span>'}).join('')+'</div>';
+  if(swap&&!RM){d.classList.remove('swap');void d.offsetWidth;d.classList.add('swap')}
+}
+track.addEventListener('click',function(e){var b=e.target.closest('.node');if(!b)return;auto=false;showStage(+b.getAttribute('data-i'),true)});
+showStage(0,false);
+setInterval(function(){if(!auto)return;var r=$('domain').getBoundingClientRect();if(r.bottom<0||r.top>window.innerHeight)return;showStage((sel+1)%stages.length,true)},3800);
+
+/* lead scoring simulator */
+var leadMax=[['Budget',25],['Timeline',20],['Intent',20],['Fast reply',10],['Viewing',15],['Financing',10]];
+$('lBars').innerHTML=leadMax.map(function(m,i){return '<div class="bar-r"><span>'+m[0]+'</span><div class="tk"><i id="lb'+i+'"></i></div><span id="lv'+i+'">0</span></div>'}).join('');
+function runLead(){
+  var intent=document.querySelector('input[name=lIntent]:checked').value;
+  var pts=[+$('lBudget').value,+$('lTime').value,+intent,$('lFast').checked?10:0,$('lView').checked?15:0,+$('lFin').value];
+  var tot=pts.reduce(function(a,b){return a+b},0);
+  var grade=tot>=75?['Hot',3,'Route to a senior broker now and send a WhatsApp confirmation.']:tot>=50?['Warm',2,'Assign to a broker within the hour and send project details.']:['Cold',5,'Add to a nurture sequence and check again in seven days.'];
+  var out=$('leadOut');out.style.setProperty('--hc',HUE(grade[1]));
+  $('pg').setAttribute('stroke-dashoffset',(351.86*(1-tot/100)).toFixed(2));
+  tween($('lScore'),tot,function(v){return Math.round(v)});
+  var g=$('lGrade');g.textContent=grade[0]+' lead';
+  $('lRoute').innerHTML='<b>Suggested route</b><br>'+grade[2];
+  pts.forEach(function(p,i){$('lb'+i).style.width=(p/leadMax[i][1]*100)+'%';$('lv'+i).textContent=p+'/'+leadMax[i][1]});
+}
+$('labLead').addEventListener('input',runLead);$('labLead').addEventListener('change',runLead);
+
+/* ROI */
+function runRoi(){
+  var e=+$('rEnq').value||0,m=+$('rMin').value||0,r=+$('rRate').value||0,c=+$('rCont').value,cost=+$('rCost').value||0;
+  $('rContOut').textContent=c+'%';
+  var before=e*m/60,saved=before*c/100,after=before-saved,gross=saved*r,net=gross-cost;
+  tween($('rNet'),net,function(v){return (v<0?'−':'')+fmt(Math.abs(v))});
+  $('rNet').style.color=net<0?'var(--h3)':'var(--h4)';
+  var mx=Math.max(before,1);
+  $('rBars').innerHTML='<div class="bar-r"><span>Agent hours before</span><div class="tk"><i style="width:100%;background:var(--h2)"></i></div><span>'+Math.round(before)+'</span></div>'+
+    '<div class="bar-r"><span>Agent hours after</span><div class="tk"><i style="width:'+(after/mx*100)+'%"></i></div><span>'+Math.round(after)+'</span></div>';
+  [].forEach.call($('rBars').querySelectorAll('.tk i'),function(i){var w=i.style.width;i.style.width='0';requestAnimationFrame(function(){requestAnimationFrame(function(){i.style.width=w})})});
+  $('rRows').innerHTML='<li><span>Hours handled by AI each month</span><span>'+Math.round(saved)+' h</span></li>'+
+    '<li><span>Agent cost saved each month</span><span>'+fmt(gross)+'</span></li>'+
+    '<li><span>Automation running cost</span><span>− '+fmt(cost)+'</span></li>'+
+    '<li class="total"><span>Net saving over 12 months</span><span>'+(net<0?'−':'')+fmt(Math.abs(net*12))+'</span></li>';
+}
+$('labRoi').addEventListener('input',runRoi);
+
+/* costs */
+function costs(price,ltvPct,commPct){
+  var dld=price*0.04,trustee=(price>=500000?4000:2000)*1.05,title=580,loan=price*ltvPct/100;
+  var mort=loan>0?loan*0.0025+290:0,comm=price*commPct/100*1.05;
+  var rows=[['Purchase price',price],['DLD transfer fee (4%)',dld],['Trustee office fee incl. VAT',trustee],['Title deed and admin',title]];
+  if(loan>0)rows.push(['Mortgage registration (0.25% + AED 290)',mort]);
+  if(commPct>0)rows.push(['Agency commission incl. VAT',comm]);
+  var extra=dld+trustee+title+mort+comm;
+  return {rows:rows,parts:[dld,trustee+title,mort,comm],extra:extra,total:price+extra,loan:loan,cash:price-loan+extra};
+}
+var segNames=['DLD transfer fee','Trustee and title deed','Mortgage registration','Commission'];
+function runCosts(){
+  var p=Math.max(0,+$('price').value||0),l=+$('ltv').value,cm=Math.max(0,+$('comm').value||0);
+  $('ltvOut').textContent=l+'%';
+  var c=costs(p,l,cm);
+  tween($('costTotal'),c.total,fmt);
+  var segs=$('seg').children,lg='';
+  c.parts.forEach(function(v,i){segs[i].style.width=c.extra>0?(v/c.extra*100)+'%':'0';if(v>0)lg+='<li><i class="c'+(i+1)+'"></i>'+segNames[i]+' '+fmt(v)+'</li>'});
+  $('legend').innerHTML=lg;
+  var h=c.rows.map(function(r){return '<li><span>'+r[0]+'</span><span>'+fmt(r[1])+'</span></li>'}).join('');
+  if(c.loan>0)h+='<li class="total"><span>Cash needed (price less loan, plus costs)</span><span>'+fmt(c.cash)+'</span></li>';
+  $('costRows').innerHTML=h;
+  $('costPct').textContent=p>0?'Costs add '+(c.extra/p*100).toFixed(1)+'% to the price':'';
+}
+['price','ltv','comm'].forEach(function(i){$(i).addEventListener('input',runCosts)});
+function runYield(){
+  var p=+$('yPrice').value||0,r=+$('yRent').value||0,sz=+$('ySize').value||0,sc=+$('ySc').value||0,m=+$('yMgmt').value||0;
+  var acq=costs(p,0,0).total,scTot=sz*sc,mg=r*m/100,noi=r-scTot-mg;
+  var gross=p>0?r/p*100:0,net=acq>0?noi/acq*100:0;
+  tween($('yNet'),net,function(v){return v.toFixed(2)+'%'});
+  $('yRows').innerHTML=
+   '<li><span>Gross yield (rent ÷ price)</span><span>'+gross.toFixed(2)+'%</span></li>'+
+   '<li><span>Annual rent</span><span>'+fmt(r)+'</span></li>'+
+   '<li><span>Service charge ('+sz+' sq ft × '+sc+')</span><span>− '+fmt(scTot)+'</span></li>'+
+   '<li><span>Management and maintenance</span><span>− '+fmt(mg)+'</span></li>'+
+   '<li class="total"><span>Net annual income</span><span>'+fmt(noi)+'</span></li>'+
+   '<li><span>Acquisition cost (price + DLD costs)</span><span>'+fmt(acq)+'</span></li>';
+}
+['yPrice','yRent','ySize','ySc','yMgmt'].forEach(function(i){$(i).addEventListener('input',runYield)});
+function runVisa(){
+  var v=+$('vVal').value||0,t=$('vType').value,mo=$('vMort').value,ok=v>=2000000,h='';
+  h+='<span class="pill '+(ok?'ok':'no')+'">'+(ok?'Meets AED 2M threshold':'Below AED 2M threshold')+'</span>';
+  if(ok){
+    h+='<div class="big" style="--hc:var(--h4)">10-year Golden Visa</div><p style="color:var(--muted)">Apply through the DLD Golden Visa service. Renewable, no minimum stay, family sponsorship allowed.</p><ul style="margin:0;padding-left:1.1em;color:var(--muted)">';
+    if(mo==='mort')h+='<li>Mortgaged property qualifies on DLD-certified value. The bank NOC and title deed are still required.</li>';
+    if(t==='off')h+='<li>Off-plan units must come from an approved developer. Bring the developer\'s statement of amounts paid and the SPA.</li>';
+    h+='<li>Selling the qualifying property can affect renewal, so check before listing it.</li></ul>';
+  }else{
+    h+='<div class="big" style="--hc:var(--h2)">Short by '+fmt(2000000-v)+'</div><p style="color:var(--muted)">Options below the threshold: the two-year investor visa (the old AED 750,000 floor was dropped in early 2026), or adding a second property so the combined DLD value reaches AED 2 million.</p>';
+  }
+  h+='<p class="note">Rules change. Confirm with the DLD and ICP before advising a client.</p>';
+  $('visaOut').innerHTML=h;
+}
+['vVal','vType','vMort'].forEach(function(i){$(i).addEventListener('input',runVisa)});
+
+/* law hub */
+var law={
+ 'Regulators':[
+  ['Dubai Land Department (DLD)','Registers all property transactions in Dubai and issues title deeds. Collects the 4% transfer fee.'],
+  ['RERA','Real Estate Regulatory Agency, part of the DLD. Licenses brokers and brokerages, runs the rental index, and controls advertising.'],
+  ['Dubai REST and Trakheesi','Digital services for broker cards, advertising permits and contracts.'],
+  ['Real Estate Registration Trustee centres','Authorised offices where sale transfers are completed and fees are paid.'],
+  ['Rental Dispute Centre (RDC)','Handles landlord and tenant disputes in Dubai.']],
+ 'Broker licensing':[
+  ['Broker card and BRN','Every agent needs a RERA broker card with a Broker Registration Number, tied to a licensed brokerage. Independent agents are not permitted.'],
+  ['Training and exam','Complete the certified broker course at the Dubai Real Estate Institute and pass the RERA exam. A valid UAE residence visa is needed for expatriates.'],
+  ['Trakheesi advertising permit','Every property advertisement, social media posts included, needs a Trakheesi permit number with QR code.'],
+  ['Penalties','Advertising without a permit can bring heavy fines and licence action. Verify any broker at dubailand.gov.ae.']],
+ 'Contracts and forms':[
+  ['Form A','Seller and brokerage listing agreement, which sets the commission and exclusivity.'],
+  ['Form B','Buyer and brokerage agreement.'],
+  ['Form F','Memorandum of understanding between buyer and seller. It sets price, deposit, and conditions for transfer.'],
+  ['Developer NOC','Proof that service charges are clear and the developer allows the transfer.']],
+ 'Off-plan and escrow':[
+  ['Escrow accounts','Dubai Law No. 8 of 2007 requires developers to place buyers\' payments in a project escrow account, released against construction progress.'],
+  ['Interim register','Dubai Law No. 13 of 2008 sets up the interim real estate register for off-plan units.'],
+  ['Oqood','The DLD system for registering the initial sale of an off-plan unit before completion.'],
+  ['Payment plans','Compare the post-handover share, milestone triggers and the developer\'s delivery record before recommending a plan.']],
+ 'Ownership and visas':[
+  ['Freehold','Dubai Law No. 7 of 2006 on real property registration and the decree on freehold zones allow foreign nationals to own in designated areas.'],
+  ['Jointly owned property','Dubai Law No. 27 of 2007 governs owners associations, service charges and common areas.'],
+  ['Golden Visa','10-year visa from AED 2 million of DLD-certified property, including mortgaged and off-plan units.'],
+  ['Taxes','Dubai has no annual property tax. The one-off cost is the 4% DLD fee. Corporate or VAT treatment of commercial property needs a tax adviser.']],
+ 'Rentals':[
+  ['Ejari','Every Dubai tenancy contract must be registered on Ejari. Needed for utilities and visa processing.'],
+  ['Rent increases','Increases follow the RERA rental index and the notice rules under Decree No. 43 of 2013 and the landlord and tenant laws.'],
+  ['Notice periods','Landlords generally must give 12 months written notice via notary or registered mail for non-renewal or rent changes.'],
+  ['Disputes','File with the Rental Dispute Centre after the DLD security deposit and contract documents are in order.']]
+};
+var tabs=Object.keys(law),cur=0,tabHue=[6,1,2,3,4,5];
+function renderLaw(anim){
+  $('lawTabs').innerHTML=tabs.map(function(t,i){return '<button role="tab" type="button" data-i="'+i+'" aria-selected="'+(i===cur)+'" style="--hc:'+HUE(tabHue[i])+'">'+t+'</button>'}).join('');
+  $('lawPanel').style.setProperty('--hc',HUE(tabHue[cur]));
+  $('lawPanel').innerHTML='<dl'+(anim&&!RM?' class="swap"':'')+'>'+law[tabs[cur]].map(function(x,i){return '<div style="--i:'+i+'"><dt>'+x[0]+'</dt><dd>'+x[1]+'</dd></div>'}).join('')+'</dl>';
+}
+$('lawTabs').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;cur=+b.getAttribute('data-i');renderLaw(true)});
+
+/* flip cards */
+var deck=[
+ ['Who issues a broker card and BRN?','RERA, part of the Dubai Land Department, through Trakheesi once the agent is attached to a licensed brokerage.'],
+ ['What is the DLD transfer fee on a sale?','4% of the sale value. By common practice the buyer pays it.'],
+ ['What does Trakheesi control?','Advertising permits. Every property ad needs a permit number and QR code.'],
+ ['What is Form A?','The listing agreement between the seller and the brokerage.'],
+ ['What is Form F?','The memorandum of understanding between buyer and seller for a resale.'],
+ ['What is Oqood?','The DLD system that registers the initial sale of an off-plan unit.'],
+ ['What law covers escrow accounts for off-plan projects?','Dubai Law No. 8 of 2007.'],
+ ['What is Ejari?','The registration system for tenancy contracts in Dubai.'],
+ ['Golden Visa property threshold?','AED 2 million of DLD-certified value, valid 10 years.'],
+ ['Mortgage registration fee at DLD?','0.25% of the loan amount plus AED 290.'],
+ ['Does Dubai charge annual property tax?','No. The main cost is the one-off 4% DLD registration fee.'],
+ ['What does a developer NOC confirm?','That service charges are paid and the developer permits the resale.'],
+ ['Can an agent work without a brokerage?','No. The broker card is linked to a registered brokerage.'],
+ ['Which body handles landlord and tenant disputes?','The Rental Dispute Centre.']
+];
+var ci=0,flip=$('flip');
+function renderCard(){
+  flip.classList.remove('flipped');
+  $('fq').textContent=deck[ci][0];$('fa').textContent=deck[ci][1];
+  $('cnt').textContent=(ci+1)+' / '+deck.length;
+  var d=$('dots');if(d.children.length!==deck.length){d.innerHTML=deck.map(function(){return '<i></i>'}).join('')}
+  [].forEach.call(d.children,function(x,i){x.className=i<=ci?'on':''});
+}
+function toggleFlip(){flip.classList.toggle('flipped')}
+flip.addEventListener('click',toggleFlip);
+flip.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();toggleFlip()}});
+$('next').onclick=function(){ci=(ci+1)%deck.length;renderCard()};
+$('prev').onclick=function(){ci=(ci-1+deck.length)%deck.length;renderCard()};
+$('shuf').onclick=function(){for(var i=deck.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=deck[i];deck[i]=deck[j];deck[j]=t}ci=0;renderCard();toast('Deck shuffled')};
+
+/* command palette */
+var items=[
+ {t:'Experience',k:'Section',go:'experience'},{t:'Workflow explorer',k:'Section',go:'workflow'},{t:'Skills search',k:'Section',go:'skills'},
+ {t:'UAE property lifecycle',k:'Section',go:'domain'},{t:'Lead scoring simulator',k:'Simulator',go:'labLead'},{t:'Automation return simulator',k:'Simulator',go:'labRoi'},
+ {t:'Buyer cost calculator',k:'Calculator',go:'calcs'},{t:'Golden Visa check',k:'Calculator',go:'calcs'},{t:'Law and compliance hub',k:'Section',go:'law'},
+ {t:'RERA revision cards',k:'Section',go:'exam'},{t:'Education and certifications',k:'Section',go:'background'},{t:'Contact',k:'Section',go:'contact'},
+ {t:'Toggle light and dark theme',k:'Action',fn:toggleTheme},
+ {t:'Copy email address',k:'Action',fn:function(){copyText('mustafalatamim@protonmail.com','Email')}},
+ {t:'Copy phone number',k:'Action',fn:function(){copyText('+8801980862064','Phone number')}},
+ {t:'Open WhatsApp chat',k:'Link',href:'https://wa.me/8801980862064'},
+ {t:'Open GitHub profile',k:'Link',href:'https://github.com/tamimaiii/'}
+];
+var pal=$('pal'),pq=$('palQ'),act=0,shownItems=[];
+function renderPal(){
+  var q=pq.value.trim().toLowerCase();
+  shownItems=items.filter(function(i){return !q||i.t.toLowerCase().indexOf(q)>=0||i.k.toLowerCase().indexOf(q)>=0});
+  if(act>=shownItems.length)act=0;
+  $('palList').innerHTML=shownItems.map(function(it,i){
+    var sel=i===act?' aria-selected="true"':' aria-selected="false"';
+    return it.href?'<a class="it" role="option" href="'+it.href+'"'+sel+' data-i="'+i+'"><span>'+it.t+'</span><small>'+it.k+'</small></a>':'<button class="it" type="button" role="option"'+sel+' data-i="'+i+'"><span>'+it.t+'</span><small>'+it.k+'</small></button>'}).join('')||'<p style="padding:14px;color:var(--muted)">Nothing matches.</p>';
+}
+function runItem(i){
+  var it=shownItems[i];if(!it)return;
+  if(it.href){window.open(it.href,'_blank');pal.close();return}
+  pal.close();
+  if(it.go){var el=$(it.go);if(el)el.scrollIntoView({behavior:RM?'auto':'smooth',block:'start'})}
+  if(it.fn)it.fn();
+}
+function openPal(){act=0;pq.value='';renderPal();if(pal.showModal)pal.showModal();pq.focus()}
+$('openPal').onclick=openPal;
+pq.addEventListener('input',function(){act=0;renderPal()});
+pq.addEventListener('keydown',function(e){
+  if(e.key==='ArrowDown'){e.preventDefault();act=(act+1)%Math.max(1,shownItems.length);renderPal();var s=$('palList').querySelector('[aria-selected=true]');if(s)s.scrollIntoView({block:'nearest'})}
+  else if(e.key==='ArrowUp'){e.preventDefault();act=(act-1+shownItems.length)%Math.max(1,shownItems.length);renderPal();var s2=$('palList').querySelector('[aria-selected=true]');if(s2)s2.scrollIntoView({block:'nearest'})}
+  else if(e.key==='Enter'){e.preventDefault();runItem(act)}
+});
+$('palList').addEventListener('click',function(e){var b=e.target.closest('.it');if(!b)return;if(b.tagName==='A'){pal.close();return}runItem(+b.getAttribute('data-i'))});
+pal.addEventListener('click',function(e){if(e.target===pal)pal.close()});
+document.addEventListener('keydown',function(e){
+  if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();pal.open?pal.close():openPal()}
+});
+
+runCosts();runYield();runVisa();runLead();runRoi();renderLaw(false);renderCard();
+})();
+</script>
+
+</body></html>
